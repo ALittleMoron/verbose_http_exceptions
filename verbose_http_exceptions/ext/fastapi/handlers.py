@@ -2,7 +2,7 @@
 
 from typing import TYPE_CHECKING
 
-from dev_utils.core.guards import all_dict_keys_are_str
+from dev_utils.guards import all_dict_keys_are_str
 from fastapi import FastAPI, HTTPException, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response

@@ -1,6 +1,6 @@
 from typing import Any
 
-from dev_utils.core.guards import all_elements_in_sequence_are_str
+from dev_utils.guards import all_elements_in_sequence_are_str
 
 from verbose_http_exceptions.exc import RequestValidationVerboseHTTPException
 

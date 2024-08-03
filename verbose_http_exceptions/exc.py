@@ -4,8 +4,8 @@ from collections.abc import Sequence
 from string import Template
 from typing import Any, NotRequired, Self, TypedDict
 
-from dev_utils.core.abstract import Abstract, abstract_class_property
-from dev_utils.core.utils import get_object_class_absolute_name
+from dev_utils.abstract import Abstract, abstract_class_property
+from dev_utils.common import get_object_class_absolute_name
 
 from verbose_http_exceptions.constants import (
     ABSTRACT_CLS_DEFAULT_VALUE,

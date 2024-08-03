@@ -1,7 +1,7 @@
 from string import Template
 
 import pytest
-from dev_utils.core.utils import get_object_class_absolute_name
+from dev_utils.common import get_object_class_absolute_name
 
 from verbose_http_exceptions import exc as base_http_exceptions
 
