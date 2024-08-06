@@ -126,7 +126,7 @@ dev = [
 
 [project]
 name = "verbose_http_exceptions"
-version = "1.1.0"
+version = "1.1.1"
 description = "Verbose HTTP exceptions package for web frameworks."
 authors = [{ name = "Dmitriy Lunev", email = "dima.lunev14@gmail.com" }]
 requires-python = ">=3.11"
