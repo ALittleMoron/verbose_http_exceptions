@@ -17,9 +17,7 @@ if TYPE_CHECKING:
     from fastapi import Request
     from fastapi.exceptions import RequestValidationError
 
-    from verbose_http_exceptions.exc import (
-        BaseVerboseHTTPException,
-    )
+    from verbose_http_exceptions.exc import BaseVerboseHTTPException
 
 
 async def verbose_http_exception_handler(

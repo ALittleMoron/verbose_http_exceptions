@@ -1,4 +1,4 @@
-name: Tests And Linting
+name: "Package pipeline: test, lint, "
 
 on:
   pull_request:
@@ -15,12 +15,24 @@ jobs:
     with:
       coverage: true
       python-version: ${{ matrix.python-version }}
+  lint:
+    name: "Lint (${{ matrix.python-version }}"
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.11"]
+    needs: test
+    uses: ./.github/workflows/lint.yaml
+    with:
+      coverage: true
+      python-version: ${{ matrix.python-version }}
   publish:
     name: "Publish (${{ matrix.python-version }}"
     strategy:
       fail-fast: true
       matrix:
         python-version: ["3.11"]
+    needs: lint
     uses: ./.github/workflows/publish.yaml
     with:
       python-version: ${{ matrix.python-version }}

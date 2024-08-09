@@ -37,8 +37,8 @@ I like my project, and I want to implement it for many web-frameworks and add ne
 so my goals are to:
 
 - [ ] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
-- [ ] Add all http-exceptions for all status codes.
-- [ ] Add status codes module to make work with my package easier.
+- [x] Add all http-exceptions for all status codes.
+- [x] Add status codes module to make work with my package easier.
 
 ## Usage
 

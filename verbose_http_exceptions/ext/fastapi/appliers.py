@@ -1,9 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 
-from verbose_http_exceptions.exc import (
-    BaseVerboseHTTPException,
-)
+from verbose_http_exceptions.exc import BaseVerboseHTTPException
 from verbose_http_exceptions.ext.fastapi.handlers import (
     any_http_exception_handler,
     verbose_http_exception_handler,

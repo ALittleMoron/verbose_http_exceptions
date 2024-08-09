@@ -36,4 +36,4 @@ jobs:
           path: ./.venv
           key: venv-${{ hashFiles('pdm.lock') }}
       - name: Publish package distributions to PyPI
-        run: pdm publish
+        run: pdm publish --username=${{secrets.PDM_USERNAME}} --password=${{secrets.PDM_PASSWORD}}
