@@ -13,7 +13,6 @@ help:
 	@echo -e "  \033[0;33mlint\033[0m            run project code checking without formatting"
 	@echo -e "  \033[0;33mformat\033[0m          run project code formatting"
 	@echo -e "  \033[0;33mtest\033[0m            run all tests"
-	@echo -e "  \033[0;33mtest_docker\033[0m     run all tests in docker"
 
 	@echo ""
 	@echo -e "Check \033[0;33mMakefile\033[0m to get full context of commands."
@@ -56,10 +55,3 @@ format:
 test:
 	@if [ -z $(PDM) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
 	$(PDM) run pytest ./tests --cov-report xml --cov-fail-under 95 --cov ./$(NAME) -vv
-
-
-.PHONY: test_docker
-test_docker:
-	@if [ -z $(PDM) ]; then echo "Poetry could not be found. See https://python-poetry.org/docs/"; exit 2; fi
-	$(ENV_VARS_PREFIX) docker-compose -f docker/docker-compose-test.yaml up --build
-	$(ENV_VARS_PREFIX) docker-compose -f docker/docker-compose-test.yaml down

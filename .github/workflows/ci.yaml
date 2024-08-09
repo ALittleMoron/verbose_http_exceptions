@@ -24,7 +24,6 @@ jobs:
     needs: test
     uses: ./.github/workflows/lint.yaml
     with:
-      coverage: true
       python-version: ${{ matrix.python-version }}
   publish:
     name: "Publish (${{ matrix.python-version }}"
@@ -36,3 +35,5 @@ jobs:
     uses: ./.github/workflows/publish.yaml
     with:
       python-version: ${{ matrix.python-version }}
+      pdm-username: ${{ secrets.PDM_USERNAME }}
+      pdm-password: ${{ secrets.PDM_PASSWORD }}

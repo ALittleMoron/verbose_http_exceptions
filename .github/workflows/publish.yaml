@@ -3,6 +3,12 @@ name: Python package publish
 on:
   workflow_call:
     inputs:
+      pdm-username:
+        required: true
+        type: string
+      pdm-password:
+        required: true
+        type: string
       python-version:
         required: true
         type: string
@@ -36,4 +42,4 @@ jobs:
           path: ./.venv
           key: venv-${{ hashFiles('pdm.lock') }}
       - name: Publish package distributions to PyPI
-        run: pdm publish --username=${{secrets.PDM_USERNAME}} --password=${{secrets.PDM_PASSWORD}}
+        run: pdm publish --username=${{ inputs.pdm-username }} --password=${{ inputs.pdm-password }}
