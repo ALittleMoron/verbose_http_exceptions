@@ -26,13 +26,13 @@ expected_error_422_result = {
 }
 base_500_result = {
     "code": "server_error",
-    "type": "server_error",
+    "type": "internal_server_error",
     "attr": None,
     "location": None,
 }
 expected_error_500_result = {
     **base_500_result,
-    "message": "Unexpected server error was found: test.",
+    "message": "Internal server error was found: test.",
 }
 expected_http_exception_500_result = {
     **base_500_result,

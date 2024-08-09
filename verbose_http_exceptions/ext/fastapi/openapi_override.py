@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 
-from verbose_http_exceptions.constants import (
+from verbose_http_exceptions.ext.fastapi.constants import (
     BASE_VERBOSE_HTTP_VALIDATION_ERROR,
     VERBOSE_HTTP_VALIDATION_ERROR,
 )
@@ -30,7 +30,7 @@ def _build_verbose_exception_schema(app: FastAPI) -> None:
         return
 
     app.openapi_schema["components"]["schemas"][
-        'BaseVerboseHTTPValidationError'
+        'RequestValidationHTTPExceptionWithNestedErrors'
     ] = BASE_VERBOSE_HTTP_VALIDATION_ERROR
     app.openapi_schema["components"]["schemas"][
         'VerboseHTTPValidationError'

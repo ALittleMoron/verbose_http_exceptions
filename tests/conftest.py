@@ -1,24 +1,18 @@
 import asyncio
-import os
 from typing import TYPE_CHECKING, Literal
 
 import pytest
 from fastapi import FastAPI, HTTPException
 from fastapi.testclient import TestClient
-from mimesis import Datetime, Locale, Text
 
-from verbose_http_exceptions.exc import ServerErrorVerboseHTTPException
-from verbose_http_exceptions.ext.fastapi.handlers import (
+from verbose_http_exceptions.exc import InternalServerErrorHTTPException
+from verbose_http_exceptions.ext.fastapi import (
     apply_all_handlers,
     apply_verbose_http_exception_handler,
 )
 
 if TYPE_CHECKING:
     from collections.abc import Generator
-
-
-true_stmt = {"y", "Y", "yes", "Yes", "t", "true", "True", "1"}
-IS_DOCKER_TEST = os.environ.get("IS_DOCKER_TEST", "false") in true_stmt
 
 
 @pytest.fixture(scope="session")
@@ -30,22 +24,12 @@ def event_loop() -> "Generator[asyncio.AbstractEventLoop, None, None]":
 
 
 @pytest.fixture()
-def text_faker() -> Text:
-    return Text(locale=Locale.EN)
-
-
-@pytest.fixture()
-def dt_faker() -> Datetime:
-    return Datetime(locale=Locale.EN)
-
-
-@pytest.fixture()
 def test_app_only_verbose() -> "Generator[TestClient, None, None]":
     app = FastAPI()
 
     @app.get("/")
     def index():  # type: ignore reportUnusedFunction # noqa: ANN202
-        raise ServerErrorVerboseHTTPException(mapping={"reason": "test"})
+        raise InternalServerErrorHTTPException(template_vars={"reason": "test"})
 
     apply_verbose_http_exception_handler(app)
 
@@ -70,7 +54,7 @@ def test_app_all_verbose() -> "Generator[TestClient, None, None]":
 
     @app.get("/verbose_error")
     def verbose_error():  # type: ignore reportUnusedFunction # noqa: ANN202
-        raise ServerErrorVerboseHTTPException(mapping={"reason": "test"})
+        raise InternalServerErrorHTTPException(template_vars={"reason": "test"})
 
     apply_all_handlers(app)
 

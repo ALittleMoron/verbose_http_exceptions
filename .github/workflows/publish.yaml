@@ -1,4 +1,4 @@
-name: Python package lint
+name: Python package publish
 
 on:
   workflow_call:
@@ -35,7 +35,5 @@ jobs:
         with:
           path: ./.venv
           key: venv-${{ hashFiles('pdm.lock') }}
-      - name: Install the project dependencies
-        run: make install
-      - name: Run linting
-        run: make lint
+      - name: Publish package distributions to PyPI
+        run: pdm publish

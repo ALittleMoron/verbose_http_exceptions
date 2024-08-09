@@ -2,8 +2,8 @@ from typing import Any
 
 import pytest
 
-from verbose_http_exceptions.exc import RequestValidationVerboseHTTPException
 from verbose_http_exceptions.ext.fastapi import utils as verbose_http_exceptions_utils
+from verbose_http_exceptions.ext.fastapi.exc import ValidationHTTPException
 
 
 @pytest.mark.parametrize(
@@ -43,7 +43,7 @@ def test_resolve_errors(
     [
         (
             {'loc': ("loc", "attr"), "type": "validation_error", "msg": "message"},
-            RequestValidationVerboseHTTPException(
+            ValidationHTTPException(
                 location="loc",
                 attr_name="attr",
                 message="message",
@@ -54,7 +54,7 @@ def test_resolve_errors(
 )
 def test_validation_error_from_error_dict(
     error: dict[str, Any],
-    expected_result: RequestValidationVerboseHTTPException,
+    expected_result: ValidationHTTPException,
 ) -> None:
     assert (
         verbose_http_exceptions_utils.validation_error_from_error_dict(error).as_dict()

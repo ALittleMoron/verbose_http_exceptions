@@ -31,6 +31,15 @@ For PDM:
 pdm add verbose_http_exceptions
 ```
 
+# What is next?
+
+I like my project, and I want to implement it for many web-frameworks and add new functionality,
+so my goals are to:
+
+- [ ] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
+- [ ] Add all http-exceptions for all status codes.
+- [ ] Add status codes module to make work with my package easier.
+
 ## Usage
 
 Verbose exceptions with single format. This utils was inspired by
@@ -45,7 +54,7 @@ To work with this util you must add exception handlers in your FastAPI project l
 
 ```python
 from fastapi import FastAPI
-from verbose_http_exceptions.fastapi.handlers import (
+from verbose_http_exceptions.ext.fastapi import (
     apply_verbose_http_exception_handler,
     apply_all_handlers,
 )
