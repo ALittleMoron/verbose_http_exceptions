@@ -35,5 +35,5 @@ jobs:
     uses: ./.github/workflows/publish.yaml
     with:
       python-version: ${{ matrix.python-version }}
-      pdm-username: ${{ secrets.PDM_USERNAME }}
-      pdm-password: ${{ secrets.PDM_PASSWORD }}
+      pdm-username: "${{ secrets.PDM_USERNAME }}"
+      pdm-password: "${{ secrets.PDM_PASSWORD }}"
