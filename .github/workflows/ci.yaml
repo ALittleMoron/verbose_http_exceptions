@@ -24,7 +24,6 @@ jobs:
     needs: test
     uses: ./.github/workflows/lint.yaml
     with:
-      coverage: true
       python-version: ${{ matrix.python-version }}
   publish:
     name: "Publish (${{ matrix.python-version }}"
