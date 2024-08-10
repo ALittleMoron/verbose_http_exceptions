@@ -1,7 +1,10 @@
 
 # Verbose HTTP exceptions
 
+[![PyPI version](https://badge.fury.io/py/verbose-http-exceptions.svg)](https://badge.fury.io/py/verbose_http_exceptions)
 ![coverage](./coverage.svg)
+
+[![types - Mypy](https://img.shields.io/badge/types-Pyright-2ecf29.svg?logo=python&labelColor=202235&color=2ecf29&logoColor=ffffff)](https://github.com/python/mypy) [![License - MIT](https://img.shields.io/badge/license-MIT-2ecf29.svg?logo=python&labelColor=202235&color=2ecf29&logoColor=ffffff)](https://spdx.org/licenses/) [![code style](https://img.shields.io/badge/types-Ruff-2ecf29.svg?logo=python&labelColor=202235&color=2ecf29&logoColor=ffffff)](https://github.com/psf/black)
 
 ## For what?
 
