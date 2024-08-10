@@ -1,0 +1,22 @@
+name: Make manual GitHub release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-message:
+        description: 'Release message (for example, version of the package)'
+        required: true
+        type: string
+
+jobs:
+  release:
+    name: Make manual release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Create a Release
+      uses: elgohr/Github-Release-Action@v5
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        title: ${{ inputs.release-message }}
