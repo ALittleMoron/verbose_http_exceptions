@@ -1,4 +1,4 @@
-name: Python package test
+name: Testing
 
 on:
   workflow_call:
@@ -6,10 +6,6 @@ on:
       python-version:
         required: true
         type: string
-      poetry-version:
-        required: false
-        type: string
-        default: "1.8"
       coverage:
         required: false
         type: boolean

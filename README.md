@@ -4,7 +4,10 @@
 [![PyPI version](https://badge.fury.io/py/verbose-http-exceptions.svg)](https://badge.fury.io/py/verbose_http_exceptions)
 ![coverage](./coverage.svg)
 
-[![types - Mypy](https://img.shields.io/badge/types-Pyright-2ecf29.svg?logo=python&labelColor=202235&color=2ecf29&logoColor=ffffff)](https://github.com/python/mypy) [![License - MIT](https://img.shields.io/badge/license-MIT-2ecf29.svg?logo=python&labelColor=202235&color=2ecf29&logoColor=ffffff)](https://spdx.org/licenses/) [![code style](https://img.shields.io/badge/types-Ruff-2ecf29.svg?logo=python&labelColor=202235&color=2ecf29&logoColor=ffffff)](https://github.com/psf/black)
+[![types - Mypy](https://img.shields.io/badge/types-Pyright-2ecf29.svg?logo=python&color=2ecf29&logoColor=ffffff)](https://github.com/python/mypy)
+[![License - MIT](https://img.shields.io/badge/license-MIT-2ecf29.svg?logo=python&color=2ecf29&logoColor=ffffff)](https://spdx.org/licenses/)
+[![code style](https://img.shields.io/badge/types-Ruff-2ecf29.svg?logo=python&color=2ecf29&logoColor=ffffff)](https://github.com/astral-sh/ruff)
+[![Actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/ci.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
 
 ## For what?
 
@@ -33,15 +36,6 @@ For PDM:
 ```bash
 pdm add verbose_http_exceptions
 ```
-
-# What is next?
-
-I like my project, and I want to implement it for many web-frameworks and add new functionality,
-so my goals are to:
-
-- [ ] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
-- [x] Add all http-exceptions for all status codes.
-- [x] Add status codes module to make work with my package easier.
 
 ## Usage
 
@@ -111,3 +105,12 @@ or this (multiple exceptions supported too):
 
 `apply_all_handler` function also has `override_422_openapi` param (default True). You can turn
 it off to avoid overriding 422 errors in your application OpenAPI schema.
+
+# What is next?
+
+I like my project, and I want to implement it for many web-frameworks and add new functionality,
+so my goals are to:
+
+- [ ] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
+- [x] Add all http-exceptions for all status codes.
+- [x] Add status codes module to make work with my package easier.

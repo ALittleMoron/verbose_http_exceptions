@@ -1,4 +1,4 @@
-name: Make manual GitHub release
+name: Releasing
 
 on:
   workflow_dispatch:
@@ -9,6 +9,15 @@ on:
         type: string
 
 jobs:
+  publish:
+    name: "Publish (${{ matrix.python-version }}"
+    needs: lint
+    uses: ./.github/workflows/_publish.yaml
+    with:
+      python-version: "3.11"
+    secrets:
+      pdm-username: "${{ secrets.PDM_USERNAME }}"
+      pdm-password: "${{ secrets.PDM_PASSWORD }}"
   release:
     runs-on: ubuntu-latest
     permissions:

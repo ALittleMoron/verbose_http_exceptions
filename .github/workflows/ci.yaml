@@ -1,8 +1,10 @@
-name: "Package pipeline: test, lint, "
+name: "test, lint and publish"
 
 on:
-  pull_request:
   push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -11,7 +13,7 @@ jobs:
       fail-fast: true
       matrix:
         python-version: ["3.11"]
-    uses: ./.github/workflows/test.yaml
+    uses: ./.github/workflows/_test.yaml
     with:
       coverage: true
       python-version: ${{ matrix.python-version }}
@@ -22,19 +24,6 @@ jobs:
       matrix:
         python-version: ["3.11"]
     needs: test
-    uses: ./.github/workflows/lint.yaml
+    uses: ./.github/workflows/_lint.yaml
     with:
       python-version: ${{ matrix.python-version }}
-  publish:
-    name: "Publish (${{ matrix.python-version }}"
-    strategy:
-      fail-fast: true
-      matrix:
-        python-version: ["3.11"]
-    needs: lint
-    uses: ./.github/workflows/publish.yaml
-    with:
-      python-version: ${{ matrix.python-version }}
-    secrets:
-      pdm-username: "${{ secrets.PDM_USERNAME }}"
-      pdm-password: "${{ secrets.PDM_PASSWORD }}"

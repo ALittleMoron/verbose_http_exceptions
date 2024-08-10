@@ -1,12 +1,7 @@
-name: Python package publish
+name: Linting
 
 on:
   workflow_call:
-    secrets:
-      pdm-username:
-        required: true
-      pdm-password:
-        required: true
     inputs:
       python-version:
         required: true
@@ -22,7 +17,7 @@ on:
 
 
 jobs:
-  publish:
+  lint:
     timeout-minutes: ${{ inputs.timeout }}
     runs-on: ${{ inputs.os }}
     steps:
@@ -40,5 +35,7 @@ jobs:
         with:
           path: ./.venv
           key: venv-${{ hashFiles('pdm.lock') }}
-      - name: Publish package distributions to PyPI
-        run: pdm publish --username=${{ secrets.pdm-username }} --password=${{ secrets.pdm-password }}
+      - name: Install the project dependencies
+        run: make install
+      - name: Run linting
+        run: make lint
