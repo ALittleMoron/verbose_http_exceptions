@@ -8,7 +8,7 @@
 [![License - MIT](https://img.shields.io/badge/license-MIT-2ecf29.svg?logo=python&color=3ec965&logoColor=ffffff&labelColor=353b42)](https://spdx.org/licenses/)
 [![code style](https://img.shields.io/badge/code_style-Ruff-2ecf29.svg?logo=python&color=3ec965&logoColor=ffffff&labelColor=353b42)](https://github.com/astral-sh/ruff)
 [![CI actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/ci.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
-[![CI actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/release.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
+[![Release actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/release.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
 
 ## For what?
 
@@ -114,3 +114,4 @@ so my goals are to:
 - [ ] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
 - [x] Add all http-exceptions for all status codes.
 - [x] Add status codes module to make work with my package easier.
+- [ ] Add tests for all exceptions (Now only specific errors tested for coverage).

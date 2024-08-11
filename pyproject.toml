@@ -123,7 +123,7 @@ dev = [
 
 [project]
 name = "verbose_http_exceptions"
-version = "2.0.0"
+version = "2.1.0"
 description = "Verbose HTTP exceptions package for web frameworks."
 authors = [{ name = "Dmitriy Lunev", email = "dima.lunev14@gmail.com" }]
 requires-python = ">=3.11"
@@ -133,6 +133,7 @@ dependencies = ["python-dev-utils==7.0.1"]
 
 [project.optional-dependencies]
 fastapi = ["fastapi"]
+litestar = ["litestar"]
 
 [build-system]
 requires = ["pdm-backend"]
