@@ -16,6 +16,9 @@ I made this package to make my work with http exceptions more easier. In FastAPI
 with HTTP exceptions - they are too simple. Only `detail` field and that is all. And other tools
 that make http exceptions more verbose works not like I expect.
 
+This package was inspired by [drf-exceptions-hog](https://github.com/PostHog/drf-exceptions-hog),
+but implemented for other Web-frameworks.
+
 ## Install
 
 To install the package you need you run the following commands.
@@ -39,10 +42,6 @@ pdm add verbose_http_exceptions
 ```
 
 ## Usage
-
-Verbose exceptions with single format. This utils was inspired by
-[drf-exceptions-hog](https://github.com/PostHog/drf-exceptions-hog), but implemented for other
-Web-frameworks.
 
 Now only FastAPI extension is implemented.
 
