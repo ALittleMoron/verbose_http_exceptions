@@ -4,9 +4,11 @@ from typing import TYPE_CHECKING
 
 from dev_utils.guards import all_dict_keys_are_str
 from fastapi import HTTPException, status
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response
 
-from verbose_http_exceptions import error_by_status_mapping
+from verbose_http_exceptions import InternalServerErrorHTTPException, error_by_status_mapping
+from verbose_http_exceptions.exc import BaseVerboseHTTPException
 from verbose_http_exceptions.ext.fastapi.exc import (
     RequestValidationHTTPExceptionWithNestedErrors,
     ValidationHTTPException,
@@ -15,9 +17,6 @@ from verbose_http_exceptions.ext.fastapi.utils import validation_error_from_erro
 
 if TYPE_CHECKING:
     from fastapi import Request
-    from fastapi.exceptions import RequestValidationError
-
-    from verbose_http_exceptions.exc import BaseVerboseHTTPException
 
 
 async def verbose_http_exception_handler(
@@ -29,7 +28,11 @@ async def verbose_http_exception_handler(
     Handle only BaseVerboseHTTPException inherited instances. For handling all exceptions use
     ``any_http_exception_handler``.
     """
-    return JSONResponse(status_code=exc.status_code, content=exc.as_dict(), headers=exc.headers)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=exc.as_dict(),
+        headers=exc.headers,
+    )
 
 
 async def verbose_request_validation_error_handler(
@@ -64,12 +67,31 @@ async def any_http_exception_handler(
 ) -> "Response":
     """Handle any HTTPException errors (BaseVerboseHTTPException too).
 
-    Doesn't handle 422 request error. Use ``verbose_request_validation_error_handler`` for it.
+    Doesn't handle 422 request error well. Use ``verbose_request_validation_error_handler`` for it.
     """
-    class_ = error_by_status_mapping[exc.status_code]
+    class_ = error_by_status_mapping.get(exc.status_code)
+    if class_ is None:
+        raise exc
     content = class_(message=exc.detail).as_dict()
     return JSONResponse(
         status_code=exc.status_code,
         content=content,
         headers=exc.headers,
+    )
+
+
+async def any_exception_handler(
+    request: "Request",
+    exc: "Exception",
+) -> "Response":
+    """Handle any exception."""
+    if isinstance(exc, BaseVerboseHTTPException):
+        return await verbose_http_exception_handler(request, exc)
+    if isinstance(exc, RequestValidationError):
+        return await verbose_request_validation_error_handler(request, exc)
+    if isinstance(exc, HTTPException):
+        return await any_http_exception_handler(request, exc)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content=InternalServerErrorHTTPException(message=str(exc)).as_dict(),
     )

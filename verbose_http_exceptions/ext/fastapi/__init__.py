@@ -5,9 +5,16 @@ from verbose_http_exceptions.ext.pydantic_schemas import (
 )
 
 from .appliers import apply_all_handlers as apply_all_handlers
+from .appliers import apply_any_http_exception_handler as apply_any_http_exception_handler
 from .appliers import apply_verbose_http_exception_handler as apply_verbose_http_exception_handler
+
+# NOTE: too long names to fit them in 100 chars (line max length).
+from .appliers import (
+    apply_verbose_request_validation_error_handler,  # type: ignore[reportUnusedImport]
+)
 from .exc import RequestValidationHTTPExceptionWithNestedErrors  # type: ignore[reportUnusedImport]
 from .exc import ValidationHTTPException as ValidationHTTPException
+from .handlers import any_exception_handler as any_exception_handler
 from .handlers import any_http_exception_handler as any_http_exception_handler
 from .handlers import verbose_http_exception_handler as verbose_http_exception_handler
 from .handlers import (

@@ -115,3 +115,4 @@ so my goals are to:
 - [x] Add all http-exceptions for all status codes.
 - [x] Add status codes module to make work with my package easier.
 - [ ] Add tests for all exceptions (Now only specific errors tested for coverage).
+- [ ] Add extra mapping to response (Litestar compatibility + good idea itself).
