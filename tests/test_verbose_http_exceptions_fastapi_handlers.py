@@ -58,7 +58,30 @@ def test_all_verbose_handlers_http_verbose(test_app_all_verbose: TestClient) -> 
     assert response.json() == expected_error_500_result
 
 
+def test_all_verbose_handlers_skip_204_error(test_app_all_verbose: TestClient) -> None:
+    response = test_app_all_verbose.get("/no_content_error")
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+    assert not response.content
+
+
+def test_all_verbose_handlers_non_http(test_app_all_verbose: TestClient) -> None:
+    response = test_app_all_verbose.get("/general_error")
+    assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
+    assert response.json() == {
+        **base_500_result,
+        "message": "My bad!",
+    }
+
+
 def test_only_verbose_handlers(test_app_only_verbose: TestClient) -> None:
     response = test_app_only_verbose.get("/")
     assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
     assert response.json() == expected_error_500_result
+
+
+def test_only_verbose_handlers_with_fastapi_http_exception(
+    test_app_only_verbose: TestClient,
+) -> None:
+    response = test_app_only_verbose.get("/error")
+    assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
+    assert response.json() == {"detail": "test detail"}
