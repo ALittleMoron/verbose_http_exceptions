@@ -104,7 +104,7 @@ apply_verbose_http_exception_handler(app)
 # See document-strings of functions for more information.
 ```
 
-> [!NOTE] Specific use
+> [!NOTE]
 > Package contains appliers, which add handlers to FastAPI instance, and handlers itself, so
 > you can work with them directly. Import them from regular package path or pass `.handlers` to it.
 
@@ -125,11 +125,11 @@ app = Litestar(
 )
 ```
 
-> [!NOTE] Specific use
+> [!NOTE]
 > `ALL_EXCEPTION_HANDLERS_MAP` is a ready to use dictionary with all exception handlers. Extension
 > has other handlers and handler mappings, so you can import them directly with Litestar instance.
 
-> [!WARNING] Possible incorrect use
+> [!WARNING]
 > Make sure, you pass handlers and handler mappings correctly, because they are not general,
 > so algorithms inside them can be different, and if you pass, for example, `python_error_handler`
 > with litestar `ValidationException`, server will always return 500 internal server error without
