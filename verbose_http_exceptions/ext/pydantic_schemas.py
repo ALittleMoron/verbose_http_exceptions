@@ -18,6 +18,7 @@ class VerboseHTTPExceptionSchema(BaseModel):  # noqa: D101
             "or literal error on client side (validation error)."
         ),
         examples=[
+            "internal_server_error",
             "database_error",
             "literal_error",
             "missing",

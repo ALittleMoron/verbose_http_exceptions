@@ -8,7 +8,7 @@
 [![License - MIT](https://img.shields.io/badge/license-MIT-2ecf29.svg?logo=python&color=3ec965&logoColor=ffffff&labelColor=353b42)](https://spdx.org/licenses/)
 [![code style](https://img.shields.io/badge/code_style-Ruff-2ecf29.svg?logo=python&color=3ec965&logoColor=ffffff&labelColor=353b42)](https://github.com/astral-sh/ruff)
 [![CI actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/ci.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
-[![CI actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/release.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
+[![Release actions status](https://github.com/ALittleMoron/verbose_http_exceptions/actions/workflows/release.yaml/badge.svg)](https://github.com/ALittleMoron/verbose_http_exceptions/actions)
 
 ## For what?
 
@@ -43,25 +43,8 @@ pdm add verbose_http_exceptions
 
 ## Usage
 
-Now only FastAPI extension is implemented.
-
-### FastAPI implementation
-
-To work with this util you must add exception handlers in your FastAPI project like this:
-
-```python
-from fastapi import FastAPI
-from verbose_http_exceptions.ext.fastapi import (
-    apply_verbose_http_exception_handler,
-    apply_all_handlers,
-)
-
-app = FastAPI()
-apply_all_handlers(app)
-# or
-apply_verbose_http_exception_handler(app)
-# See document-strings of functions for more information.
-```
+You can use all these exceptions for your need even without any web-framework, but mostly, it may
+be useless, so use extensions in this package or write your own, if you need.
 
 Then all (or some specific part of) your exceptions will be returned to users in JSON like this:
 
@@ -103,14 +86,66 @@ or this (multiple exceptions supported too):
 }
 ```
 
-`apply_all_handler` function also has `override_422_openapi` param (default True). You can turn
-it off to avoid overriding 422 errors in your application OpenAPI schema.
+### FastAPI implementation
 
-# What is next?
+To work with this utility you must add exception handlers in your FastAPI project like this:
 
-I like my project, and I want to implement it for many web-frameworks and add new functionality,
+```python
+from fastapi import FastAPI
+from verbose_http_exceptions.ext.fastapi import (
+    apply_verbose_http_exception_handler,
+    apply_all_handlers,
+)
+
+app = FastAPI()
+apply_all_handlers(app)
+# or
+apply_verbose_http_exception_handler(app)
+# See document-strings of functions for more information.
+```
+
+> [!NOTE] Specific use
+> Package contains appliers, which add handlers to FastAPI instance, and handlers itself, so
+> you can work with them directly. Import them from regular package path or pass `.handlers` to it.
+
+> [!TIP]
+> `apply_all_handler` function also has `override_422_openapi` param (default True). You can turn
+> it off to avoid overriding 422 errors in your application OpenAPI schema.
+
+### Litestar implementation
+
+To work with this utility you must add exception handlers in your Litestar project like this:
+
+```python
+from litestar import Litestar
+from verbose_http_exceptions.ext.litestar import ALL_EXCEPTION_HANDLERS_MAP
+
+app = Litestar(
+    exception_handlers=ALL_EXCEPTION_HANDLERS_MAP
+)
+```
+
+> [!NOTE] Specific use
+> `ALL_EXCEPTION_HANDLERS_MAP` is a ready to use dictionary with all exception handlers. Extension
+> has other handlers and handler mappings, so you can import them directly with Litestar instance.
+
+> [!WARNING] Possible incorrect use
+> Make sure, you pass handlers and handler mappings correctly, because they are not general,
+> so algorithms inside them can be different, and if you pass, for example, `python_error_handler`
+> with litestar `ValidationException`, server will always return 500 internal server error without
+> any context, if there is validation request error raised.
+
+## What is next?
+
+I like this project, and I want to implement it for many web-frameworks and add new functionality,
 so my goals are to:
 
-- [ ] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
+- [x] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
+- [ ] Add OpenAPI override for Litestar.
+  FastAPI already has override functionality to add to 422 errors verbose schema and description.
 - [x] Add all http-exceptions for all status codes.
 - [x] Add status codes module to make work with my package easier.
+- [ ] Add tests for all exceptions (Now only specific errors tested for coverage).
+- [ ] Add extra mapping to response (Litestar compatibility + good idea itself), but pass
+  only important context.
+- [ ] Add other content response types like XML.

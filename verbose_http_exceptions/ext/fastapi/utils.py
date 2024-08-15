@@ -28,7 +28,7 @@ def resolve_error_location_and_attr(error: dict[str, Any]) -> tuple[Location, At
 def validation_error_from_error_dict(
     error: dict[str, Any],
 ) -> ValidationHTTPException:
-    """Convert error dict to UnprocessableContentHTTPException instance."""
+    """Convert error dict to ValidationHTTPException instance."""
     location, attribute = resolve_error_location_and_attr(error)
     return ValidationHTTPException(
         type_=error.get("type") or "not_known_type",

@@ -1,5 +1,3 @@
-from typing import Any
-
 BASE_VERBOSE_HTTP_VALIDATION_ERROR = {
     "properties": {
         "code": {
@@ -89,43 +87,4 @@ VERBOSE_HTTP_VALIDATION_ERROR = {
     "title": "VerboseHTTPValidationError",
     "description": "Override of FastAPI HTTPValidationError in 422 status code.",
     "type": "object",
-}
-
-
-INFO_START_DIGIT = 1
-SUCCESS_START_DIGIT = 2
-REDIRECT_START_DIGIT = 3
-CLIENT_ERROR_START_DIGIT = 4
-SERVER_ERROR_START_DIGIT = 5
-ERROR_MAPPING: dict[int, dict[str, Any]] = {
-    INFO_START_DIGIT: {
-        "code": "info",
-        "type": "info",
-        "location": None,
-        "attr": None,
-    },
-    SUCCESS_START_DIGIT: {
-        "code": "success",
-        "type": "success",
-        "location": None,
-        "attr": None,
-    },
-    REDIRECT_START_DIGIT: {
-        "code": "redirect",
-        "type": "redirect",
-        "location": None,
-        "attr": None,
-    },
-    CLIENT_ERROR_START_DIGIT: {
-        "code": "client_error",
-        "type": "client_error",
-        "location": None,
-        "attr": None,
-    },
-    SERVER_ERROR_START_DIGIT: {
-        "code": "server_error",
-        "type": "server_error",
-        "location": None,
-        "attr": None,
-    },
 }

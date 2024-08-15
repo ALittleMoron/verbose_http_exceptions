@@ -111,7 +111,7 @@ def test_class_repr() -> None:
     exc = exc_info.value
     assert repr(exc).startswith(
         (
-            "tests.test_verbose_http_exceptions.TestHttpException1(status_code=400, code='test', "
+            "tests.test_core.TestHttpException1(status_code=400, code='test', "
             "type='Test', message='test message', location=None"
         ),
     )
