@@ -43,7 +43,7 @@ async def verbose_request_validation_error_handler(
     """Handle RequestValidationError to override 422 error."""
     nested_errors: list[ValidationHTTPException] = []
     errors = exc.errors()
-    if len(errors) == 1:  # pragma: no coverage
+    if len(errors) == 1:
         error = errors[0]
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
