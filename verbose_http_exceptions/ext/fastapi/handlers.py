@@ -29,7 +29,11 @@ async def verbose_http_exception_handler(
     Handle only BaseVerboseHTTPException inherited instances. For handling all exceptions use
     ``any_http_exception_handler``.
     """
-    return JSONResponse(status_code=exc.status_code, content=exc.as_dict(), headers=exc.headers)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=exc.as_dict(),
+        headers=exc.headers,
+    )
 
 
 async def verbose_request_validation_error_handler(
@@ -39,7 +43,7 @@ async def verbose_request_validation_error_handler(
     """Handle RequestValidationError to override 422 error."""
     nested_errors: list[ValidationHTTPException] = []
     errors = exc.errors()
-    if len(errors) == 1:  # pragma: no coverage
+    if len(errors) == 1:
         error = errors[0]
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -64,9 +68,18 @@ async def any_http_exception_handler(
 ) -> "Response":
     """Handle any HTTPException errors (BaseVerboseHTTPException too).
 
-    Doesn't handle 422 request error. Use ``verbose_request_validation_error_handler`` for it.
+    Doesn't handle 422 request error well. Use ``verbose_request_validation_error_handler`` for it.
     """
-    class_ = error_by_status_mapping[exc.status_code]
+    class_ = error_by_status_mapping.get(exc.status_code)
+    if class_ is None:
+        response = JSONResponse(
+            status_code=exc.status_code,
+            content=exc.detail,
+            headers=exc.headers,
+        )
+        if exc.status_code == status.HTTP_204_NO_CONTENT:  # pragma: no cover
+            response.body = b''
+        return response
     content = class_(message=exc.detail).as_dict()
     return JSONResponse(
         status_code=exc.status_code,
