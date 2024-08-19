@@ -21,7 +21,7 @@ but implemented for other Web-frameworks.
 
 ## Install
 
-To install the package you need you run the following commands.
+To install the package you need to run the following commands.
 
 For pip:
 
@@ -143,6 +143,7 @@ so my goals are to:
 - [x] Integrate this package with [litestar](https://github.com/litestar-org/litestar).
 - [ ] Add OpenAPI override for Litestar.
   FastAPI already has override functionality to add to 422 errors verbose schema and description.
+- [ ] Integrate this package with [django](https://github.com/django/django).
 - [x] Add all http-exceptions for all status codes.
 - [x] Add status codes module to make work with my package easier.
 - [ ] Add tests for all exceptions (Now only specific errors tested for coverage).
