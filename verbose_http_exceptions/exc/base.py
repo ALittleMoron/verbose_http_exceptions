@@ -166,6 +166,7 @@ class BaseVerboseHTTPException(Abstract, Exception):  # noqa: N818
         """Convert Exception instance into dict.
 
         Usage:
+
         ```
         class SomeClass(BaseVerboseHTTPException):
             code = 'abc'

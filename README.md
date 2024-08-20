@@ -43,6 +43,10 @@ pdm add verbose_http_exceptions
 
 ## Usage
 
+> [!WARNING]
+> Project still has validation exceptions with incorrect parsed fields (`code`, `type`, etc.),
+> so if you find error with `__not_known_type__` or `__not_known_message__`, open issue on GitHub.
+
 You can use all these exceptions for your need even without any web-framework, but mostly, it may
 be useless, so use extensions in this package or write your own, if you need.
 
@@ -150,3 +154,8 @@ so my goals are to:
 - [ ] Add extra mapping to response (Litestar compatibility + good idea itself), but pass
   only important context.
 - [ ] Add other content response types like XML.
+- [ ] Add settings for exception handling.
+
+Refactoring plans:
+
+- [ ] make framework utils more general: add only different rules, but use same functions.
